@@ -1,3 +1,4 @@
+// card start
 .custom-card {
     border-radius: 16px;
     background-color: #243325;
@@ -28,6 +29,63 @@
 
 }
 
+// card end 
+
+// modal start
+.modal {
+    .modal-content {
+        background-color: #292b27;
+        border-radius: 16px;
+
+        .modal-header {
+            border-bottom: 0px;
+            padding-bottom: 0px; 
+
+            h1 {
+                @include size-weight-color(18px, 600, $white); 
+            }
+
+            h6 {
+                @include size-weight-color(14px, 500, $white);
+                margin-bottom: 0px;
+            }
+            .btn-close{
+                border: 1px solid $border-color;
+                border-radius: 8px;
+                color: #c2de4d;
+            }
+        }
+
+        .modal-footer {
+            border-top: 0px;
+        }
+    }
+}
+
 .disabled {
     cursor: not-allowed !important;
+}
+
+.header{
+    border-bottom: 1px solid $border-color;
+    padding: 16px 24px;
+    height: 56px;
+    display: flex;
+    justify-content: end;
+}
+.item{
+    &:last-child{
+        padding-right: 0px !important;
+    }
+}
+.btn-text{
+    color: #c2de4d;
+    &:hover{
+        color: #c2de4d;
+    }
+}
+.btn-secondary{
+    border-radius: 8px;
+    background-color: #3f413d !important;
+    color: #d1d1d0;
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useGetRecordsQuery } from '../../api/fakeApi';
-import Pagination from './Pagination';
+import Pagination from './Paggination';
 
 export default function Table() {
   const [data, setData] = useState([])
@@ -61,10 +61,10 @@ export default function Table() {
         <td>{item?.value}</td>
         <td>
           <div className=''>
-            <button className={`btn btn-outline-success me-2 ${!item?.isVisible ? "disabled" : ""}`} disabled={isUserView} onClick={() => setSelectedRowInfo({ isModal: true, rowData: item })}>
+            <button className={`btn btn-outline-success me-2 ${!item?.isVisible ? "disabled" : ""}`} data-bs-toggle="modal" data-bs-target="#exampleModal" disabled={isUserView} onClick={() => setSelectedRowInfo({ isModal: true, rowData: item })}>
               <i className="fa-solid fa-pencil" />
             </button>
-            <button className='btn btn-outline-primary me-2 data-bs-toggle="modal' disabled={isUserView} onClick={() => viewHandler(item?.name)}>
+            <button className='btn btn-outline-primary me-2' disabled={isUserView} onClick={() => viewHandler(item?.name)}>
               <i className={item?.isVisible ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"} />
             </button>
             <button className='btn btn-outline-danger' disabled={isUserView} onClick={() => handleDelete(item?.name)}>
@@ -87,24 +87,10 @@ export default function Table() {
       </div>
     )
   }
-
-  const searchHandler = (event) => {
-    const searchData = event?.target?.value?.toLowerCase();
-    setDataFilter(searchData)
-  }
-
-  // const getSearch = () => {
-
-  //   return (
-  //     <div style={{ margin: "20px" }}>
-  //       <input type='tex' placeholder='search ...' value={dataFilter} onChange={(event) => searchHandler(event)} />
-  //     </div>
-  //   )
-  // }
-
   function productTable() {
     return (
-      <div className='table-wrapper'>
+     <div className=''>
+       <div className='table-wrapper'>
         <div className='table-parent'>
           <table >
             <thead>
@@ -115,12 +101,13 @@ export default function Table() {
         </div>
         {tablePagination()}
       </div>
+     </div>
     );
   }
 
   const getCardRenderer = (title, value) => {
     return (
-      <div className='flex-25 me-1'>
+      <div className='flex-25 pe-3 item'>
         <div className='card custom-card'>
           <div className='card-body'>
             <i className="fa-solid fa-check"></i>
@@ -169,92 +156,106 @@ export default function Table() {
     setSelectedRowInfo({ isModal: false, rowData: {} });
   };
   return (
-    <div className='content-body'>
-      <div className='header'>
-        <div className="toggle-container">
-          <div style={{ display: 'flex', justifyContent: "end" }}>
-            <div style={{ marginRight: "10px", color: "#fff" }}>Admin</div>
-            <input type="checkbox" id="toggle" className="toggle-input" onChange={(e) => setIsUserView(e.target.checked)} />
-            <label htmlFor="toggle" className="toggle-label" />
-            <div style={{ marginLeft: "10px", color: "#fff" }}>User</div>
+    <>
+    <header className='header'> 
+          <div className="toggle-container">
+            <div className='d-flex align-items-center'>
+              <div style={{ marginRight: "10px", color: "#fff" }}>Admin</div>
+              <input type="checkbox" id="toggle" className="toggle-input" onChange={(e) => setIsUserView(e.target.checked)} />
+              <label htmlFor="toggle" className="toggle-label" />
+              <div style={{ marginLeft: "10px", color: "#fff" }}>User</div>
+            </div>
           </div>
+ 
+    </header>
+      <div className='content-body'>
+          <h1 className='text-white mb-4'>Inventory stats</h1>
+        {/* {getSearch()} */}
+        <div className='d-flex '>
+          {getCardRenderer("total Product", currentRecords?.filter(item => item?.isVisible).length)}
+          {getCardRenderer("total Store Value", ` $ ${getProductTotalPrice(currentRecords)}`)}
+          {getCardRenderer("Out Of Stock", getOutOfStockProduct(currentRecords))}
+          {getCardRenderer("No Of Category", getCategoryCount(currentRecords))}
         </div>
-        <h1 style={{ color: "#fff" }}>Inventory stats</h1>
+        {productTable()}
       </div>
-      {/* {getSearch()} */}
-      <div className='d-flex'>
-        {getCardRenderer("total Product", currentRecords?.filter(item => item?.isVisible).length)}
-        {getCardRenderer("total Store Value", ` $ ${getProductTotalPrice(currentRecords)}`)}
-        {getCardRenderer("Out Of Stock", getOutOfStockProduct(currentRecords))}
-        {getCardRenderer("No Of Category", getCategoryCount(currentRecords))}
-      </div>
-      {productTable()}
-
-      {selectedRowInfo?.isModal ?
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h1>Edit Product</h1>
-            <h6>{selectedRowInfo?.rowData?.name}</h6>
-            <div className="">
-              <div className="flex-50">
-                <div className="">
-                  <label htmlFor="name" className="">
-                    Category<span className="text-danger">*</span> :
-                  </label>
-                  <input
-                    className=""
-                    value={selectedRowInfo?.rowData?.category}
-                    placeholder="Enter name"
-                    onChange={(e) => setSelectedRowInfo(prev => ({ ...prev, rowData: { ...prev.rowData, category: e.target.value } }))}
-                  />
+      {selectedRowInfo?.isModal &&
+        <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <div>
+                  <h1 className="modal-title fs-5" id="exampleModalLabel">Edit Product</h1>
+                  <h6>{selectedRowInfo?.rowData?.name}</h6>
+                </div>
+                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div className="modal-body">
+                <div className="d-flex">
+                  <div className="flex-50 pe-1">
+                    <div className="form-group">
+                      <label htmlFor="name" className="form-label">
+                        Category 
+                      </label>
+                      <input
+                        className="form-control"
+                        value={selectedRowInfo?.rowData?.category}
+                        placeholder="Enter name"
+                        onChange={(e) => setSelectedRowInfo(prev => ({ ...prev, rowData: { ...prev.rowData, category: e.target.value } }))}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex-50 ps-1">
+                    <div className="form-group">
+                      <label htmlFor="name" className="form-label">
+                        Price  
+                      </label>
+                      <input
+                        className="form-control"
+                        value={selectedRowInfo?.rowData?.price}
+                        placeholder="Enter price"
+                        onChange={(e) => setSelectedRowInfo(prev => ({ ...prev, rowData: { ...prev.rowData, price: e.target.value } }))}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex-50 pe-1">
+                    <div className="form-group">
+                      <label htmlFor="name" className="form-label">
+                        Quantity 
+                      </label>
+                      <input
+                        className="form-control"
+                        value={selectedRowInfo?.rowData?.quantity}
+                        placeholder="Enter quantity"
+                        onChange={(e) => setSelectedRowInfo(prev => ({ ...prev, rowData: { ...prev.rowData, quantity: e.target.value } }))}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex-50 ps-1">
+                    <div className="form-group">
+                      <label htmlFor="name" className="form-label">
+                        Value  
+                      </label>
+                      <input
+                        className="form-control"
+                        value={selectedRowInfo?.rowData?.value}
+                        placeholder="Enter value"
+                        onChange={(e) => setSelectedRowInfo(prev => ({ ...prev, rowData: { ...prev.rowData, value: e.target.value } }))}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="flex-50">
-                <div className="">
-                  <label htmlFor="name" className="">
-                    Price <span className="text-danger">*</span> :
-                  </label>
-                  <input
-                    className=""
-                    value={selectedRowInfo?.rowData?.price}
-                    placeholder="Enter price"
-                    onChange={(e) => setSelectedRowInfo(prev => ({ ...prev, rowData: { ...prev.rowData, price: e.target.value } }))}
-                  />
-                </div>
-              </div>
-              <div className="flex-50">
-                <div className="">
-                  <label htmlFor="name" className="">
-                    Quantity <span className="text-danger">*</span> :
-                  </label>
-                  <input
-                    className=""
-                    value={selectedRowInfo?.rowData?.quantity}
-                    placeholder="Enter quantity"
-                    onChange={(e) => setSelectedRowInfo(prev => ({ ...prev, rowData: { ...prev.rowData, quantity: e.target.value } }))}
-                  />
-                </div>
-              </div>
-              <div className="flex-50">
-                <div className="">
-                  <label htmlFor="name" className="">
-                    Value <span className="text-danger">*</span> :
-                  </label>
-                  <input
-                    className=""
-                    value={selectedRowInfo?.rowData?.value}
-                    placeholder="Enter value"
-                    onChange={(e) => setSelectedRowInfo(prev => ({ ...prev, rowData: { ...prev.rowData, value: e.target.value } }))}
-                  />
-                </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-text text-waring" data-bs-dismiss="modal" onClick={() => setSelectedRowInfo({ isModal: false, rowData: {} })}>Cancel</button>
+                <button type="button" className="btn  btn-secondary" data-bs-dismiss="modal" onClick={()=>updateHandler()}>Save </button>
               </div>
             </div>
-            <button onClick={() => setSelectedRowInfo({ isModal: false, rowData: {} })}>Close</button>
-            <button onClick={updateHandler}>Save</button>
           </div>
         </div>
-        : ""}
 
-    </div>
+      }
+    </>
   )
 }
+

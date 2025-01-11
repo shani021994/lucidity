@@ -1,56 +1,7 @@
  
 .d-flex{
     display: flex;
-    flex-wrap: nowrap;
-}
-
-
-.flex-7_5 {
-    flex-basis: 7.5%;
-    max-width: 7.5%;
-}
-
-.flex-8_5 {
-    flex-basis: 8.5%;
-    max-width: 8.5%;
-}
-
-.flex-12_5 {
-    flex-basis: 12.5%;
-    max-width: 12.5%;
-}
-
-.flex-16_6 {
-    flex-basis: 16.65%;
-    max-width: 16.65%;
-}
-
-.flex-17_5 {
-    flex-basis: 17.5%;
-    max-width: 17.5%;
-}
-
-.flex-18_3 {
-    flex-basis: 18.33%;
-    max-width: 18.33%;
-}
-.flex-20 {
-    flex-basis: 20%;
-    max-width: 20%;
-}
-.flex-21_5 {
-    flex-basis: 21.5%;
-    max-width: 21.5%;
-}
-
-.flex-22_5 {
-    flex-basis: 22.5%;
-    max-width: 22.5%;
-}
-
-.flex-23_5 {
-    flex-basis: 23.5%;
-    max-width: 23.5%;
+    flex-wrap: wrap;
 }
 
 .flex-25 {
@@ -58,34 +9,7 @@
     max-width: 25%;
 }
 
-.flex-33 {
-    flex-basis: 33.3333% !important;
-    max-width: 33.3333% !important;
+.flex-50 {
+    flex-basis: 50%;
+    max-width: 50%;
 }
-
-.flex-67 {
-    flex-basis: 66.6667%;
-    max-width: 66.6667%;
-}
-
-.flex-37_5 {
-    flex-basis: 37.5%;
-    max-width: 37.5%;
-}
-
-.flex-42_5 {
-    flex-basis: 42.5%;
-    max-width: 42.5%;
-}
-
-.flex-82_5 {
-    flex-basis: 82.5%;
-    max-width: 82.5%;
-}
-
-.flex-87_5 {
-    flex-basis: 87.5%;
-    max-width: 87.5%;
-}
-
-/*------ End-------*/

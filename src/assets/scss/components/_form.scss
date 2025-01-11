@@ -1,1 +1,19 @@
- 
+ .form-group{
+    margin-bottom: 16px;
+    .form-label{
+        color: #d1d1d0;
+    }
+    .form-control{ 
+       border-radius: 8px;
+       border: none;
+        height: 36px; 
+        outline: none !important;
+        background-color: #3f413d !important;
+        box-shadow: none; 
+        color: #d1d1d0;
+        &:hover{
+            border: none;
+        }
+
+    }
+ }

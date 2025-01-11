@@ -1,10 +1,9 @@
 .content-wrapper{ 
     height: 100vh;
-    padding: 20px;
     overflow-y: hidden;
     background-color: $content-bg; 
     .content-body{
-       padding: 10px;
+      padding: 24px; 
        height: calc(100vh - 85px);
        overflow: auto;  
     }    
@@ -13,6 +12,7 @@
 
 .toggle-container {
     position: relative;
+
   }
   
   .toggle-input {
@@ -21,8 +21,8 @@
   
   .toggle-label {
     position: relative;
-    width: 60px;
-    height: 30px;
+    width: 42px;
+    height: 16px;
     background-color: #ccc;
     border-radius: 50px;
     cursor: pointer;
@@ -32,8 +32,8 @@
   .toggle-label::before {
     content: '';
     position: absolute;
-    top: 3px;
-    left: 3px;
+    top: -5px;
+    left: 0px;
     width: 24px;
     height: 24px;
     background-color: white;
@@ -46,5 +46,5 @@
   }
   
   .toggle-input:checked + .toggle-label::before {
-    transform: translateX(30px);
+    transform: translateX(20px);
   }
