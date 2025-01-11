@@ -1,0 +1,17 @@
+// main.scss calling other scss files
+
+// Utils
+@import 'utils/variables'; 
+@import 'utils/mixins'; 
+
+// file for base
+@import 'base/content';  
+
+// file for theme
+@import 'theme/flex'; 
+@import 'theme/custom'; 
+
+//components 
+@import 'components/table'; 
+@import 'components/form';  
+@import 'components/button';  

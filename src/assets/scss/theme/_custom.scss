@@ -1,0 +1,33 @@
+.custom-card {
+    border-radius: 16px;
+    background-color: #243325;
+    padding: 16px;
+    margin-bottom: 16px;
+
+    .card-body {
+        display: flex;
+
+        i {
+            @include size-weight-color(18px, 500, $white);
+            margin-right: 24px;
+        }
+
+        .info {
+            h6 {
+                @include size-weight-color(18px, 500, $white);
+                margin-bottom: 12px;
+            }
+
+            h3 {
+                @include size-weight-color(32px, 700, $white);
+                margin-bottom: 0px;
+
+            }
+        }
+    }
+
+}
+
+.disabled {
+    cursor: not-allowed !important;
+}

@@ -1,0 +1,28 @@
+
+
+@mixin size-weight-color($size, $weight, $color) {
+    font-size: $size;
+    font-weight: $weight;
+    color: $color;
+}
+@mixin size-color($size, $color) {
+    font-size: $size;
+    color: $color;
+}
+
+@mixin size-weight($size, $weight) {
+    font-size: $size;
+    font-weight: $weight;
+}
+
+@mixin weight-color($weight, $color) {
+    font-weight: $weight;
+    color: $color;
+} 
+@mixin image {
+   width: 100%;
+   height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+ 

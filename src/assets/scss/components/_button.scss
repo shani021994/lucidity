@@ -1,0 +1,13 @@
+.btn {
+    border: none;
+
+    &:hover {
+        background-color: transparent !important;
+       
+    }
+    &:focus{
+        outline:none !important;
+        box-shadow: none !important;
+    }
+}
+
